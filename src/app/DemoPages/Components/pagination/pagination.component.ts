@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { CompetenceService } from '../../shared/competence.service';
 
 @Component({
   selector: 'app-pagination',
@@ -24,10 +25,15 @@ export class PaginationComponent implements OnInit {
     this.isDisabled = !this.isDisabled;
   }
 
-  constructor() {
+  constructor(public competence: CompetenceService) {
   }
-
+Id : string= this.competence.UserId;
   ngOnInit() {
+    console.log(this.Id);
+    this.competence.getUser(this.Id);
+    this.competence.GetLabel(this.Id);
+    this.competence.GetDomaineUser(this.Id);
+   
   }
 
 }

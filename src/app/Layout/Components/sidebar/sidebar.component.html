@@ -301,16 +301,18 @@
                                   </button>
                                 </div>
                                 <div class="card-body">
-                                  <form class="form" role="form" class="mb-4" autocomplete="off">
+                                  <form [formGroup]="Option" class="form" role="form" class="mb-4" autocomplete="off">
                                     <div class="form-group row">
                                       <label class="col-lg-3 col-form-label form-control-label" >Nom</label>
                                       <div class="col-lg-9">
-                                        <select class="form-control"  
+                                        <select class="form-control" formControlName="All" name="All" 
                                        style="width: 100px;"  (change)="ValueChangeuser($event)">
                                         <option >
                                           select</option>
                                           <option >
-                                           All</option>
+                                           All
+                                          </option>
+                                        
                                         <option *ngFor="let item of competence.usersTrue " [value]="item.id" >
                                           {{item.userName}} {{item.fullName}}</option>
                                        

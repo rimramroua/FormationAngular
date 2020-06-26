@@ -38,6 +38,7 @@ const COUNTRIES: Country[] = [
 @Component({
   selector: 'app-regular',
   templateUrl: './regular.component.html',
+  //templateUrl: 
   styles: []
 })
 export class RegularComponent implements OnInit {

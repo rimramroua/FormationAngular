@@ -2,9 +2,11 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ThemeOptions} from '../../../theme-options';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompetenceService } from 'src/app/DemoPages/shared/competence.service';
+import { FormBuilder,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +15,7 @@ import { CompetenceService } from 'src/app/DemoPages/shared/competence.service';
 export class SidebarComponent implements OnInit {
   public extraParameter: any;
 
-  constructor(public globals: ThemeOptions, public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
+  constructor(public globals: ThemeOptions,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
 
   }
 
@@ -34,11 +36,15 @@ export class SidebarComponent implements OnInit {
   sidebarHover() {
     this.globals.sidebarHover = !this.globals.sidebarHover;
   }
-  userId:number
+  userId:string
   ValueChangeuser(event) {
     this.userId=event.target.value;
   console.log( this.userId);
 }
+
+Option = this.Fb.group({
+  All: ['', Validators.required]
+})
   ngOnInit() {
 
 
@@ -70,6 +76,20 @@ export class SidebarComponent implements OnInit {
   }
   choix(){
     console.log(this.userId)
-    this.router.navigate(['/tables/bootstrap']);
+    console.log(this.Option.value.All)
+    if(this.Option.value.All=="All"){
+     
+      this.router.navigate(['/tables/bootstrap']);
+    }
+    else{
+    
+      this.competence.GetLabel(this.userId);
+      this.competence.getUser(this.userId);
+      this.competence.GetDomaineUser(this.userId);
+      this.competence.UserId=this.userId;
+   //   this.http.post('https://localhost:44385/api/Metier/PostGet',metier).subscribe
+      this.router.navigate(['/components/pagination']);
+    }
+    
   }
 }

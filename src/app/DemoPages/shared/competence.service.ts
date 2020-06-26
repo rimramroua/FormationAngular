@@ -18,11 +18,47 @@ import { Users } from '../Models/users.model';
     formData: Domaine;
     LabeList:Labels[]
     LabeList1:Labels[]
+    UserId: string;
     GetAllDomaine(){
         this.http.get('https://localhost:44385/api/Domaine/GetAllDomaines').toPromise().then(
           res=>{
             this.DomaineList = res as Domaine[];
             console.log(this.DomaineList);
+         //  this.users = data.json();
+         
+          }
+        )
+      }
+      user:Users[];
+      getUser(UserId){
+        
+        this.http.get('https://localhost:44385/api/Metier/GetuserSelected/'+UserId).toPromise().then(
+          res=>{
+            this.user = res as Users[];
+           console.log(this.user[0]);
+         //  this.users = data.json();
+          }
+        ) 
+      }
+      UserDomaineList: Domaine[];
+
+      GetDomaineUser(UserId){
+        this.http.get('https://localhost:44385/api/Metier/GetAllDomaineuser/'+UserId).toPromise().then(
+          res=>{
+            this.UserDomaineList = res as Domaine[];
+            console.log(this.UserDomaineList[0]);
+         //  this.users = data.json();
+         
+          }
+        )
+      }
+      UserLabelList: Labels[];
+      GetLabel(UserId){
+       
+        this.http.get('https://localhost:44385/api/Metier/GetAllUserLabel/'+UserId).toPromise().then(
+          res=>{
+            this.UserLabelList = res as Labels[];
+            console.log(this.UserLabelList[0]);
          //  this.users = data.json();
          
           }
