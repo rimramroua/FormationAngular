@@ -6,7 +6,8 @@ import { CompetenceService } from '../../shared/competence.service';
   templateUrl: './pagination.component.html',
 })
 export class PaginationComponent implements OnInit {
-
+  niveau;
+  labelid;
   heading = 'Pagination';
   subheading = 'Basic and dynamic pagination for use in your next awesome application.';
   icon = 'pe-7s-notebook icon-gradient bg-mixed-hopes';
@@ -30,6 +31,7 @@ export class PaginationComponent implements OnInit {
 Id : string= this.competence.UserId;
   ngOnInit() {
     console.log(this.Id);
+    this.competence.get(this.Id)
     this.competence.getUser(this.Id);
     this.competence.GetLabel(this.Id);
     this.competence.GetDomaineUser(this.Id);

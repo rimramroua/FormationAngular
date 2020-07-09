@@ -29,14 +29,25 @@ import { Users } from '../Models/users.model';
           }
         )
       }
-      user:Users[];
+      user:Users;
       getUser(UserId){
-        
-        this.http.get('https://localhost:44385/api/Metier/GetuserSelected/'+UserId).toPromise().then(
+        this.http.get('https://localhost:44385/api/Metier/Getuser/'+UserId).subscribe(
           res=>{
-            this.user = res as Users[];
-           console.log(this.user[0]);
+            console.log(res);
+            this.user = res as Users;
+           console.log(this.user);
          //  this.users = data.json();
+          }
+        ) 
+      }
+      List:any;
+      get(UserId){
+        this.http.get('https://localhost:44385/api/Metier/GetuserSelected/'+UserId).subscribe(
+          res=>{
+            console.log(res);
+            this.List = res;
+           console.log(this.List[0]);
+         //  tihis.users = data.json();
           }
         ) 
       }

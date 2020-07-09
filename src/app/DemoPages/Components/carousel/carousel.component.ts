@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-
+import { DirecteureActiviteCompetenceService } from '../../shared/DirecteureActiviteCompetence.service';
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
@@ -96,5 +96,22 @@ export class CarouselComponent {
     adaptiveHeight: true,
     dots: true,
   };
+  constructor(public competence: DirecteureActiviteCompetenceService) {
+  }
+//ici lazem je recupeer l'id de user connecté
+//puis j'affiche le matrice par domaine
+users = JSON.parse(localStorage.getItem('users')) ;
+payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+ngOnInit(){
+  this.competence.getUser(this.payLoad.UserID);
+  this.competence.get(this.payLoad.UserID);
+  this.competence.GetDomaineActivite(this.payLoad.UserID);
+  this.competence.GetLabel(this.payLoad.UserID);
+
+}
+
+
+
+
 
 }
