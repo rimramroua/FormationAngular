@@ -16,7 +16,7 @@ export class FormationService {
     reactiveRadio: new FormControl(true)
   })
   num: number=0;
-  constructor(private fb: FormBuilder,private Fb: FormBuilder,private Part: FormBuilder,private FB: FormBuilder ,private OrgFB: FormBuilder,private http: HttpClient,private router: Router) {
+  constructor(private fb: FormBuilder,private Activ: FormBuilder,private Fb: FormBuilder,private Part: FormBuilder,private FB: FormBuilder ,private OrgFB: FormBuilder,private http: HttpClient,private router: Router) {
 
     this.reactiveForm.controls['reactiveRadio'].valueChanges.subscribe((state: any) => {
       this.num=state;
@@ -38,7 +38,9 @@ export class FormationService {
   key:string;
   readonly BaseURI = 'https://localhost:44385/api';
 
-  
+  Activite= this.Activ.group({
+    activite:['', Validators.required],
+   });
 
     formModel = this.fb.group({
      Intitule_Formation: ['', Validators.required],
@@ -110,7 +112,12 @@ ParticipantModel=this.Part.group({
    this.resultat=res;
  }
 
-
+ ajouteracticite(){
+   var Activite={
+    Activite: this.Activite.value.Activite,
+   }
+   return this.http.post(this.BaseURI + '/Activite/RegisterActivite', Activite);
+ }
 
 
 
@@ -256,17 +263,22 @@ deleteBesoinCollecte(id){
   console.log(id);
   return this.http.delete(this.BaseURI + '/BesoinCollecte/deleteBesoinCollecte/'+ id);
 }
-
+tabLab = [];
 getAllFormation(){
   this.http.get(this.BaseURI  + '/BesoinFormation/GetAllBesoin').toPromise().then(
     res=>{
       this.BesFormation = res as Besoin_Formation[];
       console.log(this.BesFormation);
    //  this.users = data.json();
+   this.BesFormation.map(p =>{
+    console.log(this.tabLab.indexOf(p));
+    if(this.tabLab.indexOf(p.activite) ==-1  ) this.tabLab.push(p.activite);
+  })  
+  console.log(this.tabLab);
     }
   )
 }
-
+JustificationBesoin=[]
 //ici on fait les get des besoins qui son réalisé
 GetAllBesoinCollecte(){
   this.http.get('https://localhost:44385/api/BesoinCollecte/GetBesoin').toPromise().then(
@@ -274,7 +286,13 @@ GetAllBesoinCollecte(){
       this.besoins = res as Besoin_Collecte[];
       console.log(this.besoins);
    //  this.users = data.json();
+   this.besoins.map(p =>{
+    console.log(this.JustificationBesoin.indexOf(p));
+    if(this.JustificationBesoin.indexOf(p.justification_du_besoin) ==-1  ) this.JustificationBesoin.push(p.justification_du_besoin);
+  })  
+  console.log(this.JustificationBesoin);
     }
+
   )
 }
 

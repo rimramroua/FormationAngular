@@ -222,7 +222,7 @@ export class WaitingRegistrationBoxedComponent implements OnInit {
     this.notification.registerUserRole(id,role).subscribe(
       res => {
       
-        this.toastr.info('role bien affecté', 'succé');
+        this.toastr.info('role bien affecté',);
         this.notification.refreshList();
       },
       err => {

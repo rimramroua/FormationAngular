@@ -1,7 +1,13 @@
 <div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
-     (mouseout)="sidebarHover()">
-  <div class="app-header__logo">
-    <div > <strong>TELNET</strong></div>
+     (mouseout)="sidebarHover()" >
+  <div class="app-header__logo" style="left: 20px;">
+   
+    <i style="font-size: 30px;"  class="pe-7s-home pe-7s-rocket"></i>
+    <span class="vsm-title">
+     <strong style="color: rgb(8, 8, 8);" style="font-size: 20px;">TELNET</strong> </span>
+ 
+    
+    
     <div class="header__pane ml-auto">
       <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
               [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
@@ -11,15 +17,62 @@
       </button>
     </div>
   </div>
-  <div class="app-sidebar-content">
+ 
+  
+  <div class="app-sidebar-content" >
     <div class="app-sidebar-scroll">
-      <perfect-scrollbar [autoPropagation]="true">
+      <div class="main-menu-header ripple light"  class="icon-wrapper icon-wrapper-alt rounded-circle">
+        <img class="img-80 img-radius"  src="./assets/images/avatars/10.jpg" alt="User-Profile-Image">
+       
+      
+      </div>
+
+
+
+     
+        <div class="v-sidebar-menu vsm-default">
+          <div class="vsm-list">
+
+      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
+      <ngb-panel>
+        <ng-template ngbPanelHeader>
+          <button ngbPanelToggle class="vsm-link">
+          
+            <span class="vsm-title">
+             <strong style="font-size:18px;" >Chayma Ben Zouitine</strong> </span>
+            
+            <i class="vsm-arrow"></i>
+          </button>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="vsm-dropdown">
+            <div class="vsm-list">
+              <div class="vsm-item">
+               
+              <a routerLinkActive="active-item" routerLink="/elements/timeline" class="vsm-link"> <span
+                class="vsm-title">Mon Profile</span></a>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+       
+      </ngb-panel>
+   </ngb-accordion>
+  </div>
+</div>
+
+
+
+
+
+
+      <perfect-scrollbar [autoPropagation]="true" >
         <div class="v-sidebar-menu vsm-default">
           <div class="vsm-list">
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">
+                  <div class="vsm-header" style="color: #5581fa;">
                     Navigation principale</div>
                 </ng-template>
               </ngb-panel>
@@ -95,7 +148,7 @@
               </ngb-panel>
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">Formations</div>
+                  <div class="vsm-header"  style="color: #5581fa;">Formations</div>
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="elementsMenu">
@@ -253,7 +306,7 @@
                --><!--Tables-->
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">Compétence </div> <!--Dashboard Boxes-->
+                  <div class="vsm-header"  style="color: #5581fa;">Compétence </div> <!--Dashboard Boxes-->
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="pagesMenu3">
@@ -341,11 +394,11 @@
            
               </ngb-panel>
             </ngb-accordion>
-            <div class="vsm-header">Charts</div>
+            <div class="vsm-header" style="color: #5581fa;">Charts</div>
             <div class="vsm-item">
               <a routerLink="/charts/chartjs" routerLinkActive="active-item" class="vsm-link">
                 <i class="vsm-icon pe-7s-graph2"></i>
-                <span class="vsm-title">ChartJS</span>
+                <span class="vsm-title"  >ChartJS</span>
               </a>
             </div>
           </div>

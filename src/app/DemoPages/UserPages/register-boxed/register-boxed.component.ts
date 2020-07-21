@@ -19,12 +19,12 @@ export class RegisterBoxedComponent implements OnInit {
       (res: any) => {
         if (res.succeeded) {
           this.service.formModel.reset();
-          this.toastr.success('Nouvel utilisateur créé!','Inscription réussi.');
+          this.toastr.success('Nouvel utilisateur créé!','Inscription réussie.');
         } else {
           res.errors.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Nom utilisateur déjà pris','Échec de enregistrement.');
+                this.toastr.error('utilisateur déjà enregistré','Échec enregistrement.');
                 break;
 
               default:

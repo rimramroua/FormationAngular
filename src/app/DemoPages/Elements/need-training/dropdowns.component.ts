@@ -192,7 +192,17 @@ searchFromArray(arr, regex) {
     );
     this.formation.formModel.reset();
   }
+  AjouterActicite(){
+    this.formation.ajouteracticite().subscribe(
+      (res: any) => {
+        if (res.succeeded) {
+          this.toastr.success('Activité bien Ajouté!', '');
+        }
+      },
 
+    );
+    this.formation.Activite.reset();
+  }
   
 
   OnRegisterParticipant() {

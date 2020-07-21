@@ -102,7 +102,9 @@ export class CarouselComponent {
 //puis j'affiche le matrice par domaine
 users = JSON.parse(localStorage.getItem('users')) ;
 payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+
 ngOnInit(){
+  console.log(this.payLoad.UserID);
   this.competence.getUser(this.payLoad.UserID);
   this.competence.get(this.payLoad.UserID);
   this.competence.GetDomaineActivite(this.payLoad.UserID);

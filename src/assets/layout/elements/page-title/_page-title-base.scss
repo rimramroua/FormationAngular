@@ -27,17 +27,20 @@
     display: flex;
     align-content: center;
     align-items: center;
+   
   }
 
   .page-title-subheading {
     padding: 3px 0 0;
     font-size: $font-size-base;
     opacity: .6;
+   
 
     .breadcrumb {
       padding: 0;
       margin: 3px 0 0;
       background: transparent;
+      
     }
   }
 
@@ -80,6 +83,7 @@
 
   &.app-page-title-simple {
     margin: 0;
+    
     background: none !important;
     padding-left: 0;
     padding-right: 0;

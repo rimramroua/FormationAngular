@@ -15,7 +15,7 @@
          {{domaine.nomDomaine}}
        
           <tr class="text-center" >
-            <th *ngFor="let label of competence.UserLabelList"  [hidden]="domaine.domaineId!=label.domaineId ">
+            <th *ngFor="let label of competence.tabLab"  [hidden]="domaine.domaineId!=label.domaineId ">
   
                <span  class="text-center" >
            {{label.nomLabel}}  </span> 
@@ -40,8 +40,8 @@
   
            <tbody>
             <tr *ngFor="let item of competence.user" >
-              <th scope="row" *ngIf = "competence.user" >  {{item.userName}} {{item.fullName}}
-           
+              <th scope="row" *ngIf = "competence.user" >  
+                {{item.userName}} {{item.fullName}}
               </th>
         
         
@@ -54,15 +54,10 @@
                   <th  *ngFor="let label of competence.UserLabelList" [hidden]="domaine.domaineId!=label.domaineId " >
                 <!--    {{competence.List.indexOf(label.labelId)}}-->
                     <select class="form-control" style="width: 60px;" >
-                      <option *ngFor="let item of competence.List, let i = index" [selected]="item.labelId==label.labelId" >
-                           {{i}}
+                      <option *ngFor="let j of competence.List, let i = index" [selected]="j.labelId==label.labelId" [hidden]="j.userId==item.id " >
+                           {{j.niveau}}
                       </option>
-                      <option  >
-                       3
-                   </option>
-                   <option  >
-                    4
-                </option>
+                     
                         
                     
                     

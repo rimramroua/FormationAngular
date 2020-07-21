@@ -11,7 +11,7 @@ import { Users } from '../Models/users.model';
   })
   export class DirecteureActiviteCompetenceService {
     constructor(private fb: FormBuilder,private FB: FormBuilder,private Fb: FormBuilder,private http: HttpClient,private router: Router){}
-
+    tabLab = [];
     user:Users;
       getUser(UserId){
         this.http.get('https://localhost:44385/api/Metier/GetusersByDomaine/'+UserId).subscribe(
@@ -54,7 +54,13 @@ import { Users } from '../Models/users.model';
         this.http.get('https://localhost:44385/api/Metier/GetLabelDA/'+UserId).toPromise().then(
           res=>{
             this.UserLabelList = res as Labels[];
-            console.log(this.UserLabelList[0]);
+            console.log(this.UserLabelList);
+            
+            this.UserLabelList.map(p =>{
+              console.log(this.tabLab.indexOf(p));
+              if(this.tabLab.indexOf(p) < 0 ) this.tabLab.push(p);
+            })  
+            console.log(this.tabLab);
          //  this.users = data.json();
          
           }

@@ -92,4 +92,11 @@ Option = this.Fb.group({
     }
     
   }
+  public isCollapsedSideBar: string;
+  public sidebarFixedHeight: string;
+ 
+  toggleOpenedSidebar() {
+    this.isCollapsedSideBar = this.isCollapsedSideBar === 'yes-block' ? 'no-block' : 'yes-block';
+    this.sidebarFixedHeight = this.isCollapsedSideBar === 'yes-block' ? 'calc(100vh - 353px)' : 'calc(100vh - 236px)';
+  }
 }
