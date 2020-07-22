@@ -18,7 +18,14 @@ export class SidebarComponent implements OnInit {
   constructor(public globals: ThemeOptions,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
 
   }
-
+  users = JSON.parse(localStorage.getItem('users')) ;
+  payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+  changeValueID(event){
+    console.log(this.payLoad);
+    console.log(this.payLoad.role);
+    console.log(this.payLoad.UserID);
+}
+Id : string= this.competence.UserId;
   @select('config') public config$: Observable<any>;
 
   private newInnerWidth: number;
@@ -47,7 +54,9 @@ Option = this.Fb.group({
 })
   ngOnInit() {
 
-
+    console.log(this.payLoad.UserID);
+    this.competence.get(this.payLoad.UserID)
+    this.competence.getUser(this.payLoad.UserID);
     this.competence.getAllUsersTrue();
 
     this.competence.GetAllDomaine();
