@@ -102,7 +102,7 @@ import { getBodyNode } from '@angular/animations/browser/src/render/shared';
     // let search = new URLSearchParams();
    // search.set('RoleName', roles);
     
-      return  this.http.post('https://localhost:44385/api/ApplicationUser/DeleteRole/'+ id,Roles);
+   return  this.http.request('delete',`https://localhost:44385/api/ApplicationUser/DeleteRole/${id}`,{body:{"RoleName" : roles}});
       //this.http.request('DELETE', 'https://localhost:44385/api/ApplicationUser/DeleteRole/'+ id, {
      //   headers: new HttpHeaders({}),
      //   body: { RoleName: roles }});

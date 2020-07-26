@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ThemeOptions} from '../../../../../theme-options';
 import { Router } from '@angular/router';
-import {MenuItems} from 'menu-items/menu-items';
+//import {MenuItems} from 'menu-items/menu-items';
 import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
 import { FormationService } from 'src/app/DemoPages/shared/formation.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

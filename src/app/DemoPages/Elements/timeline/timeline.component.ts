@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { CompetenceService } from '../../shared/competence.service';
-
+import { UserService } from '../../shared/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Users } from '../../Models/users.model';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -99,7 +102,30 @@ export class TimelineComponent implements OnInit {
     adaptiveHeight: true,
     dots: true,
   };
-  constructor(public competence: CompetenceService) {
+  constructor(public competence: CompetenceService ,public user: UserService, private toastr: ToastrService) {
+  }
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.form.reset();
+    this.user.formData = {
+      id:'',
+      userName: '',
+      email: '',
+      fullName:'',
+      valide:'',
+      normalizedUserName: '',  
+      normalizedEmail: '',
+      emailConfirmed: '',
+      passwordHash: null,
+      securityStamp: null,
+      concurrencyStamp: '',
+      phoneNumber: null,
+      phoneNumberConfirmed: false,
+      twoFactorEnabled: false,
+      lockoutEnd: null,
+      lockoutEnabled: false
+
+    }
   }
   users = JSON.parse(localStorage.getItem('users')) ;
   payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
@@ -116,5 +142,20 @@ Id : string= this.competence.UserId;
     this.competence.GetLabel(this.payLoad.UserID);
     this.competence.GetDomaineUser(this.payLoad.UserID);
   }
-
+  onSubmit(form: NgForm){
+    this.updateRecord(form);
+  
+  }
+  updateRecord(form: NgForm) {
+    this.user.Modifier().subscribe(
+      res => {
+        this.resetForm(form);
+        this.toastr.info('Modification effectuée avec succès', '');
+        this.user.refreshList(this.payLoad.UserID);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

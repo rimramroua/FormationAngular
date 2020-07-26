@@ -72,7 +72,7 @@
         <ngb-tabset>
           <ngb-tab title="Information Personnel">
             <ng-template ngbTabContent>
-              <div [@fadeInOutTranslate] class="m-t-15">
+              <div  class="m-t-15">
                 <!-- personal card start -->
                 <div class="card">
                 
@@ -152,6 +152,7 @@
                     </div>
                     <!-- end of view-info -->
                     <div class="edit-info" *ngIf="!editProfile">
+                      <form [formGroup]="user.FormModel" class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="general-info form-material">
@@ -162,48 +163,14 @@
                                     <i class="icofont icofont-user"></i>
                                   </div>
                                   <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
+                                    <input type="text"   name="userName" formControlName="UserName" [(ngModel)]="user.formData.userName" class="form-control" required="" value={{competence.user.userName}}>
                                     <span class="form-bar"></span>
                                     <label class="float-label">Nom</label>
                                     
                                   </div>
                                 </div>
-                                <div class="material-group">
-                                  <div class="material-addone">
-                                    <i class="fa fa-mars-double"></i>
-                                  </div>
-                                  <div class="form-group form-primary">
-                                    <div class="form-radio">
-                                      <div class="group-add-on">
-                                        <div class="radio radiofill radio-inline">
-                                          <label>
-                                            <input type="radio" name="radio" checked><i class="helper"></i> Male
-                                          </label>
-                                        </div>
-                                        <div class="radio radiofill radio-inline">
-                                          <label>
-                                            <input type="radio" name="radio"><i class="helper"></i> Female
-                                          </label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
 
-
-                                <div class="material-group">
-                                  <div class="material-addone">
-                                    <i class="fa fa-birthday-cake"></i>
-                                  </div>
-                                  <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">Select Your Birth Date</label>
-                                  </div>
-                                </div>
-
-
-                                <div class="material-group">
+                             <!--   <div class="material-group">
                                   <div class="material-addone">
                                     <i class="fa fa-heart"></i>
                                   </div>
@@ -216,7 +183,7 @@
                                     <span class="form-bar"></span>
 
                                   </div>
-                                </div>
+                                </div>-->
 
 
 
@@ -237,7 +204,7 @@
                                     <i class="icofont icofont-mobile-phone"></i>
                                   </div>
                                   <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
+                                    <input type="text" name="fullName" formControlName="FullName" [(ngModel)]="user.formData.fullName"  class="form-control" required="" value={{competence.user.fullName}}>  
                                     <span class="form-bar"></span>
                                     <label class="float-label">Prenon</label>
                                   </div>
@@ -249,9 +216,9 @@
                                     <i class="icofont icofont-social-twitter"></i>
                                   </div>
                                   <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
+                                    <input type="text" name="email" formControlName="Email"  [(ngModel)]="user.formData.email" class="form-control" required="" value={{competence.user.email}}>
                                     <span class="form-bar"></span>
-                                    <label class="float-label">Twitter Id</label>
+                                    <label class="float-label" >Email </label>
                                   </div>
                                 </div>
 
@@ -261,11 +228,7 @@
                                   <div class="material-addone">
                                     <i class="icofont icofont-social-skype"></i>
                                   </div>
-                                  <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">Skype Id</label>
-                                  </div>
+                                 
                                 </div>
 
 
@@ -275,11 +238,7 @@
                                   <div class="material-addone">
                                     <i class="icofont icofont-earth"></i>
                                   </div>
-                                  <div class="form-group form-primary">
-                                    <input type="text" name="footer-email" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">website</label>
-                                  </div>
+                                
                                 </div>
 
 
@@ -289,8 +248,8 @@
                             </div>
                             <!-- end of row -->
                             <div class="text-center">
-                              <a href="javascript:;" class="btn btn-primary ripple light m-r-20">Save</a>
-                              <a href="javascript:;" id="edit-cancel" class="btn btn-default ripple" (click)="toggleEditProfile()">Cancel</a>
+                              <button type="button" class="btn btn-primary" type="submit" (submit)="onSubmit(form)"  >Sauvgarder</button>
+                            
                             </div>
                           </div>
                           <!-- end of edit info -->
@@ -298,6 +257,7 @@
                         <!-- end of col-lg-12 -->
                       </div>
                       <!-- end of row -->
+                    </form>
                     </div>
                     <!-- end of edit-info -->
                   </div>

@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompetenceService } from 'src/app/DemoPages/shared/competence.service';
 import { FormBuilder,Validators } from '@angular/forms';
+import { Users } from 'src/app/DemoPages/Models/users.model';
+import { UserService } from 'src/app/DemoPages/shared/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +17,7 @@ import { FormBuilder,Validators } from '@angular/forms';
 export class SidebarComponent implements OnInit {
   public extraParameter: any;
 
-  constructor(public globals: ThemeOptions,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
+  constructor(public globals: ThemeOptions,public user: UserService,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
 
   }
   users = JSON.parse(localStorage.getItem('users')) ;
@@ -24,6 +26,10 @@ export class SidebarComponent implements OnInit {
     console.log(this.payLoad);
     console.log(this.payLoad.role);
     console.log(this.payLoad.UserID);
+}
+populateForm() {
+  this.user.formData = Object.assign({}, this.users);
+  console.log(this.users.id);
 }
 Id : string= this.competence.UserId;
   @select('config') public config$: Observable<any>;
@@ -46,17 +52,18 @@ Id : string= this.competence.UserId;
   userId:string
   ValueChangeuser(event) {
     this.userId=event.target.value;
-  console.log( this.userId);
+   console.log( this.userId);
 }
 
 Option = this.Fb.group({
   All: ['', Validators.required]
 })
   ngOnInit() {
-
-    console.log(this.payLoad.UserID);
-    this.competence.get(this.payLoad.UserID)
-    this.competence.getUser(this.payLoad.UserID);
+    var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+    console.log(payLoad)
+    console.log(payLoad.UserID);
+   // this.competence.get(this.payLoad.UserID)
+    this.competence.getUserConnecte(payLoad.UserID);
     this.competence.getAllUsersTrue();
 
     this.competence.GetAllDomaine();

@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormsModule } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { Users } from '../Models/users.model';
+import { Identifiers } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder, private http: HttpClient,private router: Router) { }
+  constructor(private fb: FormBuilder,private Fb: FormBuilder, private http: HttpClient,private router: Router) { }
   readonly BaseURI = 'https://localhost:44385/api/';
 //  readonly url = 'https://localhost:44337/api/ApplicationUser/AllUsers';
 //  users:Users[];
  // users:Users[holla,holla@getMaxListeners.com];
 //la structure de la formulaire
+readonly rootURL = 'https://localhost:44385/api';
   formModel = this.fb.group({
     UserName: ['', Validators.required],
     Email: ['', Validators.email],
@@ -25,6 +27,12 @@ export class UserService {
       ConfirmPassword: ['', Validators.required]//required cad obligatoire
     }, { validator: this.comparePasswords })
 
+  });
+
+  FormModel = this.Fb.group({
+    UserName: ['', Validators.required],
+    Email: ['', Validators.email],
+    FullName: [''],
   });
 //ici on doit confirme le password
   comparePasswords(fb: FormGroup) {
@@ -69,5 +77,27 @@ Valide:string="";
     });
     return isMatch;
   }
-
+  formData: Users;
+  user:Users;
+  getUser(UserId){
+    this.http.get('https://localhost:44385/api/Metier/Getuser/'+UserId).subscribe(
+      res=>{
+        console.log(res);
+        this.user = res as Users;
+       console.log(this.user);
+     //  this.users = data.json();
+      }
+    ) 
+  }
+ 
+  refreshList(UserId){ 
+    this.http.get(this.rootURL + '/Metier/Getuser/'+UserId)
+   .toPromise()
+   .then(res =>this.user= res as Users);
+  }
+  
+  Modifier(){
+    console.log(this.formData.email);
+    return this.http.post(this.rootURL + '/ApplicationUser/Update', this.formData);
+  }
 }

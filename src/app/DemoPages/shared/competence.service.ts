@@ -40,6 +40,17 @@ import { Users } from '../Models/users.model';
           }
         ) 
       }
+      userConnecte:Users;
+      getUserConnecte(UserId){
+        this.http.get('https://localhost:44385/api/ApplicationUser/'+UserId).subscribe(
+          res=>{
+            console.log(res);
+            this.userConnecte = res as Users;
+           console.log(this.userConnecte);
+         //  this.users = data.json();
+          }
+        ) 
+      }
       List:any;
       get(UserId){
         this.http.get('https://localhost:44385/api/Metier/GetuserSelected/'+UserId).subscribe(
